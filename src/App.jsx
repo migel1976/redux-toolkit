@@ -4,6 +4,7 @@ import './App.css'
 const App = () => {
   const [todos, setTodos] = useState([])
   const [text, setText] = useState('')
+  console.log('todo is ', todos)
 
 
   const addTodo = () => {
@@ -21,6 +22,19 @@ const App = () => {
     }
   }
 
+
+  const toggleTodoStatus = (id) => {
+    setTodos(
+      todos.map(todo => {
+        if (todo.id !== id) return todo
+        return {
+          ...todo,
+          completed: !todo.completed
+        }
+      })
+    )
+  }
+
   const removeTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id))
   }
@@ -33,7 +47,7 @@ const App = () => {
       </label>
       <ul>
         {todos.map(todo => <li key={todo.id}>
-          <input type='checkbox' checked={todo.completed} />
+          <input type='checkbox' checked={todo.completed} onChange={() => toggleTodoStatus(todo.id)} />
           <span>{todo.text}</span>
           <span style={{ color: 'red' }} onClick={() => removeTodo(todo.id)} >&times;</span>
         </li>)}
