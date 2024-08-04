@@ -8,4 +8,5 @@ ul{
 
 input:checked+span{
   text-decoration:line-through;
+  cursor:pointer;
 }
